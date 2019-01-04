@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FABLAB App</string>
+    <string name="DateChoice">Choose Date:</string>
 </resources>
