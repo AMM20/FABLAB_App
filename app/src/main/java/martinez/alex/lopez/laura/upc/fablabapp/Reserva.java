@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Reserva implements Serializable {
 
-    private String projectUse, serviceType, material, thickness, totalCost, time;
+    private String projectUse, serviceType, material, thickness, totalCost;
     private Date date;
     private List<String> reservedHours;
     private Client client;
@@ -49,14 +49,6 @@ public class Reserva implements Serializable {
 
     public void setTotalCost(String totalCost) {
         this.totalCost = totalCost;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public Date getDate() {
