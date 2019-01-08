@@ -38,60 +38,76 @@ import java.util.List;
 
 public class ReservationListActivity extends AppCompatActivity {
 
+    // Declaració de la variable Adapter utilitzada en el Recycler View.
     private Adapter adapter;
 
+    // Declaració de les variables lligades al layout de l'activitat.
     private TextView chosenDate;
 
+    // Declaració de les variables utilitzades per a mostrar la data actual i l'escollida al DatePickerDialog.
     private int year, month, day;
     private Date date;
     private final Calendar calendar = Calendar.getInstance();
 
+    // Declaració d'objectes del model.
     private List<Reserva> reservationList;
     private Reserva reserva;
     private Client client;
 
+    // Declaració d'una instància de FirebaseFirestore.
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    // Declaració de la variable lligada a la data de  reserva seleccionada.
     private String docID;
-    private String reservationID;
 
     @SuppressLint("SimpleDateFormat")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation_list);
 
+        // S'obtenen les referències als objectes del layout.
         RecyclerView reservationListView = findViewById(R.id.ReservationListView);
         chosenDate = findViewById(R.id.ChosenDate);
 
+        // Es guarda la data actual dins de les variables year, month i day.
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        // Per tal d'actualitzar el valor de chosenDate que es mostra per pantalla, cal crear un String utilitzant les variables year, month i day, de tipus int.
         String sactualdate = Integer.toString(day) + "/" + Integer.toString(month + 1) + "/" + Integer.toString(year);
         chosenDate.setText(sactualdate);
         try {
-            date = new SimpleDateFormat("dd/MM/yyyy").parse(sactualdate);
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(sactualdate); // Dins de la variable date es guarda la data actual en format Date, utilitzant el patró dd/MM/yyyy.
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        // Creació d'una llista de reserves buida.
         reservationList = new ArrayList<>();
 
+        // Crida inicial als mètodes setDocID() i CercaReserves() per a actulitzar la pantall amb la data actual.
         setDocID();
         CercaReserves();
 
+        // Configuració del RecyclerView amb un LayoutManager i un Adapter.
         reservationListView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new Adapter();
         reservationListView.setAdapter(adapter);
 
     }
 
-
+    // Aquest mètode es crida quan es prem el botó CalendarButton.
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void onClickChooseDate(View view) {
 
+        // Creació d'un quadre de diàleg amb un calendari en el qual es pot seleccionar la data desitjada.
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // Un cop s'escull la data, s'actualitza el text del TextView chosenDate.
                 String sdate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                 chosenDate.setText(sdate);
                 try {
@@ -99,20 +115,26 @@ public class ReservationListActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                // Es torna a cridar als mètodes setDocID() i CercaReserves() cada vegada que es selecciona una data.
                 setDocID();
                 CercaReserves();
             }
         }, year, month, day);
         datePickerDialog.show();
+
     }
 
+    // Aquest métode retorna l'ID del document en format YYYYMMDD, per tal de facilitar el seu filtratge i ordenació a la base de dades.
     private void setDocID() {
+
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String sdate = dateFormat.format(date);
         String[] dateArray = sdate.split("/");
         docID = dateArray[2] + dateArray[1] + dateArray[0];
+
     }
 
+    // Aquest mètode recupera totes les reserves corresponents a una data determinada, marcada pel docID.
     private void CercaReserves() {
 
         db.collection("reservas").document(docID).collection("turnos")
@@ -120,12 +142,12 @@ public class ReservationListActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot documentSnapshots) {
-                        reservationList =  new ArrayList<>();
-                        for (DocumentSnapshot doc : documentSnapshots) {
-                            OmpleReserva(doc);
-                            reservationList.add(reserva);
+                        reservationList =  new ArrayList<>(); // Es torna a crear una llista de reserves buida.
+                        for (DocumentSnapshot doc : documentSnapshots) { // Es recuperen tots els documents d'una data determinada
+                            OmpleReserva(doc); // Crida al mètode OmpleReserva()
+                            reservationList.add(reserva); // S'afegeix la reserva actual a la llista de reserves.
                         }
-                        adapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged(); // Es notifica a l'adaptador de que s'han actualitzat les dades de reservationList.
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -134,16 +156,19 @@ public class ReservationListActivity extends AppCompatActivity {
                         Log.d("dbError",e.toString());
                     }
                 });
+
     }
 
+    // Aquest mètode recupera els camps d'un document corresponent a una reserva d'una data determinada i els carrega dins d'un objecte de la classe Reserva del model.
     private void OmpleReserva(DocumentSnapshot doc) {
+
         reserva = new Reserva();
         client = new Client();
 
         client.setName(doc.getString("name"));
         client.setLastName(doc.getString("lastName"));
         client.setEmail(doc.getString("email"));
-        client.setPhone(doc.getLong("phone").intValue());
+        client.setPhone(doc.getLong("phone").intValue()); // Ja que la base de dades ens retorna un objecte de tipus Long, cal convertir-lo a un String per a guardar-lo dins de l'objecte client.
         client.setNotes(doc.getString("notes"));
 
         reserva.setClient(client);
@@ -155,39 +180,44 @@ public class ReservationListActivity extends AppCompatActivity {
         reserva.setThickness(doc.getString("thickness"));
         reserva.setTotalCost(doc.getString("totalCost"));
         reserva.setReservationID(doc.getString("reservationID"));
+
     }
 
+    // Aquest mètode es crida quan una altra activitat fa una crida a ReservationListActivity.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         switch (requestCode) {
-            case 0:
-                if (resultCode == RESULT_OK)
+            case 0: // Cas: Es realitza una crida desde ReservationDetailsActivity.
+                if (resultCode == RESULT_OK) // Si s'ha cridat a travès del mètode corresponent a l'eliminació d'una reserva.
                 {
-                    // Se actualiza la lista de reservas.
+                    // S'actualtiza la llista de reserves.
                     setDocID();
                     CercaReserves();
                 }
                 break;
-            default:
+            default: // En cas contrari (s'ha clicat el botó Back del telèfon, per exemple) no es realitza cap acció.
                 super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
+    // El ViewHolder manté referències a les parts de l'itemView que canvien quan el reciclem.
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView clientHourView;
-        private TextView clientView;
-
+        // Declaració de les variables lligades al layout de l'itemView.
+        private TextView clientHourView, clientView;
         private ImageView itemBackgroundView;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView) { // Es rep l'itemView al constructor
+
             super(itemView);
 
+            // Referències als objectes que hi ha dins de l'itemView.
             clientHourView = itemView.findViewById(R.id.ClientHourView);
             clientView = itemView.findViewById(R.id.ClientView);
             itemBackgroundView = itemView.findViewById(R.id.ItemBackgroundView);
 
+            // S'afegeix un OnClickListener que crida a l'activitat ReservationDetailsActivity i li passa les dades de la reserva seleccionada.
             itemBackgroundView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -207,17 +237,21 @@ public class ReservationListActivity extends AppCompatActivity {
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+            // Creació d'un item de la pantalla a partir del layout view_reservation_list.
             View reservationListView = getLayoutInflater().inflate(R.layout.view_reservation_list,parent,false);
+            // Es crea i es retorna el ViewHolder associat.
             return new ViewHolder(reservationListView);
         }
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+            // Dins d'un objecte de la classe Reserva del nostre model, s'obté el valor de la reserva en la posició que es passa al mètode.
             Reserva res = reservationList.get(position);
-
+            // També s'obté l'hora d'inici i fi de la reserva a través del mètode getReservedTurn.
             String reservedTurn = getReservedTurn(res);
-
+            // S'introdueix el text pertinent a cada TextView de l'itemView.
             holder.clientHourView.setText(reservedTurn);
             holder.clientView.setText(res.getClient().getName() + " " + res.getClient().getLastName());
 
@@ -229,14 +263,16 @@ public class ReservationListActivity extends AppCompatActivity {
         }
     }
 
+
+    // Aquest mètode agafa l'Array de Stings del camp ReservedHours de l'objecte Reserva i retorna l'hora d'inici i fi en un únic String.
     @NonNull
     private String getReservedTurn(Reserva res) {
-        String turnStart = res.getReservedHours().get(0);
+        String turnStart = res.getReservedHours().get(0); // L'hora d'inici es correspon amb el primer element de l'Array de Strings.
         String turnEnd;
-        String[] hour = res.getReservedHours().get(res.getReservedHours().size()-1).split(":");
+        String[] hour = res.getReservedHours().get(res.getReservedHours().size()-1).split(":"); // L'últim element de l'Array es correspon amb l'hora d'inici de l'últim torn reservat.
         int endHour = Integer.parseInt(hour[0]);
         int endMin = Integer.parseInt(hour[1]);
-
+        // Per tal d'obtenir l'hora d'acabament de la reserva, nomès cal sumar-li un quart d'hora a endMin. Es distingeix entre dos casos.
         if (endMin + 15 == 60) {
             endHour++;
             turnEnd = String.valueOf(endHour) + ":00";
@@ -244,6 +280,7 @@ public class ReservationListActivity extends AppCompatActivity {
             endMin = endMin +15;
             turnEnd = String.valueOf(endHour) + ":" + String.valueOf(endMin);
         }
+        // Es retorna un únic String
         return turnStart + " - " + turnEnd;
     }
 }

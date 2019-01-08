@@ -8,7 +8,7 @@
     <string name="OK">De acuerdo</string>
     <string name="CANCEL">Cancelar</string>
     <string name="Client_Details">Detalles del Cliente</string>
-    <string name="Reservation_Details">Detalles de la Reserva:</string>
+    <string name="Reservation_Details">Detalles de la Reserva</string>
     <string name="Client">Cliente:</string>
     <string name="Phone">Teléfono:</string>
     <string name="Email">Correo:</string>

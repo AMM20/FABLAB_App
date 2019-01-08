@@ -4,9 +4,13 @@ import java.io.Serializable;
 
 public class Client implements Serializable {
 
+    // Declaració dels camps de la classe Client.
+
     private String name, lastName, email, notes;
 
     private Integer phone;
+
+    // Getters i Setters
 
     public String getName() {
         return name;
