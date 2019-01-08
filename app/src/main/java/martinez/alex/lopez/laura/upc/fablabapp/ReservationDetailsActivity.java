@@ -48,7 +48,7 @@ public class ReservationDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         reserva = (Reserva) intent.getSerializableExtra("reserva");
         docID = intent.getStringExtra("docID");
-        reservationID = intent.getStringExtra("reservationID");
+        reservationID = reserva.getReservationID();
 
         clientView = findViewById(R.id.ClientView);
         phoneView = findViewById(R.id.PhoneView);
@@ -61,9 +61,6 @@ public class ReservationDetailsActivity extends AppCompatActivity {
         thicknessView = findViewById(R.id.ThicknessView);
         totalCostView = findViewById(R.id.TotalCostView);
         notesView = findViewById(R.id.NotesView);
-
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.Toolbar);
-        setSupportActionBar(toolbar);
 
         OmpleDetallsReserva();
 
@@ -96,6 +93,8 @@ public class ReservationDetailsActivity extends AppCompatActivity {
                                                         .setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
                                                             @Override
                                                             public void onClick(DialogInterface dialog, int which) {
+                                                                Intent data = new Intent();
+                                                                setResult(RESULT_OK,data);
                                                                 finish();
                                                             }
                                                         });
@@ -111,12 +110,7 @@ public class ReservationDetailsActivity extends AppCompatActivity {
                                         });
                             }
                         })
-                        .setNegativeButton(R.string.CANCEL, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                return;
-                            }
-                        });
+                        .setNegativeButton(R.string.CANCEL, null);
                 AlertDialog dialog = builder.create();
                 dialog.show();
 
@@ -129,7 +123,7 @@ public class ReservationDetailsActivity extends AppCompatActivity {
     private void OmpleDetallsReserva () {
 
         clientView.setText(reserva.getClient().getName() + " " + reserva.getClient().getLastName());
-        phoneView.setText(reserva.getClient().getPhone());
+        phoneView.setText(String.valueOf(reserva.getClient().getPhone()));
         emailView.setText(reserva.getClient().getEmail());
         notesView.setText(reserva.getClient().getNotes());
 

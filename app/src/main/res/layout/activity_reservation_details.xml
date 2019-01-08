@@ -4,199 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
     tools:context=".ReservationDetailsActivity">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/Toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#008577"
-        android:elevation="4dp"
-        android:theme="@style/AppThemeNoActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <ScrollView
         android:id="@+id/DetailsView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Toolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/DetailsLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:minHeight="250dp">
 
             <TextView
-                android:id="@+id/ClientDetailsTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/ClientDetailsBox"
-                app:layout_constraintEnd_toStartOf="@+id/ClientDetailsBox"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ClientDetailsBox"
-                tools:rotation="-90"
-                tools:text="Client Details" />
-
-            <ImageView
-                android:id="@+id/ClientDetailsBox"
-                android:layout_width="0dp"
-                android:layout_height="118dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/ReservationDetailsBox"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="spread_inside"
-                app:srcCompat="@drawable/rounded_back" />
-
-            <TextView
-                android:id="@+id/ClientLabel"
+                android:id="@+id/ProjectUseLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
                 android:layout_marginTop="16dp"
+                android:text="@string/Project_Use"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/PhoneLabel"
-                app:layout_constraintStart_toStartOf="@+id/ClientDetailsBox"
-                app:layout_constraintTop_toTopOf="@+id/ClientDetailsBox"
-                app:layout_constraintVertical_chainStyle="spread"
-                tools:text="Client:" />
-
-            <TextView
-                android:id="@+id/ClientView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                app:layout_constraintBaseline_toBaselineOf="@+id/ClientLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ClientLabel"
-                tools:text="Àlex Martínez Martínez" />
+                app:layout_constraintStart_toStartOf="@+id/ClientLabel"
+                app:layout_constraintTop_toBottomOf="@+id/ReservationHour" />
 
             <TextView
                 android:id="@+id/PhoneLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:text="@string/Phone"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/EmailLabel"
                 app:layout_constraintStart_toStartOf="@+id/ClientLabel"
-                app:layout_constraintTop_toBottomOf="@+id/ClientLabel"
-                tools:text="Phone:" />
-
-            <TextView
-                android:id="@+id/PhoneView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                app:layout_constraintBaseline_toBaselineOf="@+id/PhoneLabel"
-                app:layout_constraintEnd_toEndOf="@+id/ClientView"
-                app:layout_constraintStart_toStartOf="@+id/ClientView"
-                tools:text="617095521" />
-
-            <TextView
-                android:id="@+id/EmailLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/ClientDetailsBox"
-                app:layout_constraintStart_toStartOf="@+id/ClientLabel"
-                app:layout_constraintTop_toBottomOf="@+id/PhoneLabel"
-                tools:text="Email:" />
-
-            <TextView
-                android:id="@+id/EmailView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                app:layout_constraintBaseline_toBaselineOf="@+id/EmailLabel"
-                app:layout_constraintEnd_toEndOf="@+id/ClientView"
-                app:layout_constraintStart_toStartOf="@+id/ClientView"
-                tools:text="alexmmorange97@gmail.com" />
-
-            <TextView
-                android:id="@+id/ReservationDetailsTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/ReservationDetailsBox"
-                app:layout_constraintEnd_toStartOf="@+id/ClientDetailsBox"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ReservationDetailsBox"
-                tools:rotation="-90"
-                tools:text="Reservation Details" />
-
-            <ImageView
-                android:id="@+id/ReservationDetailsBox"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/ClientDetailsBox"
-                app:layout_constraintTop_toBottomOf="@+id/ClientDetailsBox"
-                app:srcCompat="@drawable/rounded_back" />
-
-            <TextView
-                android:id="@+id/ReservationDateLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/ClientLabel"
-                app:layout_constraintTop_toTopOf="@+id/ReservationDetailsBox"
-                tools:text="Reservation Date:" />
-
-            <TextView
-                android:id="@+id/ReservationDateView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                app:layout_constraintBaseline_toBaselineOf="@+id/ReservationDateLabel"
-                app:layout_constraintEnd_toEndOf="@+id/ClientView"
-                app:layout_constraintStart_toStartOf="@+id/ClientView"
-                tools:text="dd/mm/yyyy" />
-
-            <TextView
-                android:id="@+id/ReservationHour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/ClientLabel"
-                app:layout_constraintTop_toBottomOf="@+id/ReservationDateLabel"
-                tools:text="Reservation Hour:" />
+                app:layout_constraintTop_toBottomOf="@+id/ClientLabel" />
 
             <TextView
                 android:id="@+id/ReservationHourView"
@@ -209,78 +55,91 @@
                 tools:text="10:00 - 10:30" />
 
             <TextView
-                android:id="@+id/ProjectUseLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/ClientLabel"
-                app:layout_constraintTop_toBottomOf="@+id/ReservationHour"
-                tools:text="Project Use:" />
-
-            <TextView
-                android:id="@+id/ProjectUseView"
+                android:id="@+id/TotalCostView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                app:layout_constraintBaseline_toBaselineOf="@+id/ProjectUseLabel"
+                app:layout_constraintBaseline_toBaselineOf="@+id/TotalCostLabel"
                 app:layout_constraintEnd_toEndOf="@+id/ClientView"
                 app:layout_constraintStart_toStartOf="@+id/ClientView"
-                tools:text="Personal" />
+                tools:text="30 €" />
 
             <TextView
-                android:id="@+id/ServiceTypeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/ClientLabel"
-                app:layout_constraintTop_toBottomOf="@+id/ProjectUseLabel"
-                tools:text="Service Type:" />
-
-            <TextView
-                android:id="@+id/ServiceTypeView"
+                android:id="@+id/EmailView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                app:layout_constraintBaseline_toBaselineOf="@+id/ServiceTypeLabel"
+                app:layout_constraintBaseline_toBaselineOf="@+id/EmailLabel"
                 app:layout_constraintEnd_toEndOf="@+id/ClientView"
                 app:layout_constraintStart_toStartOf="@+id/ClientView"
-                tools:text="PRO Service" />
+                tools:text="alexmmorange97@gmail.com" />
+
+            <ImageView
+                android:id="@+id/ReservationDetailsBox"
+                android:layout_width="0dp"
+                android:layout_height="350dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/ClientDetailsBox"
+                app:layout_constraintTop_toBottomOf="@+id/rule2"
+                app:layout_constraintVertical_bias="0.01"
+                app:srcCompat="@drawable/rounded_back" />
 
             <TextView
                 android:id="@+id/MaterialLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:text="@string/Material"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/ClientLabel"
-                app:layout_constraintTop_toBottomOf="@+id/ServiceTypeLabel"
-                tools:text="Material:" />
+                app:layout_constraintTop_toBottomOf="@+id/ServiceTypeLabel" />
 
             <TextView
-                android:id="@+id/MaterialView"
+                android:id="@+id/ReservationDetailsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/Reservation_Details"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toStartOf="@+id/ClientDetailsTitle"
+                app:layout_constraintTop_toBottomOf="@+id/ClientDetailsBox" />
+
+            <TextView
+                android:id="@+id/ReservationDateView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                app:layout_constraintBaseline_toBaselineOf="@+id/MaterialLabel"
+                app:layout_constraintBaseline_toBaselineOf="@+id/ReservationDateLabel"
                 app:layout_constraintEnd_toEndOf="@+id/ClientView"
                 app:layout_constraintStart_toStartOf="@+id/ClientView"
-                tools:text="DM" />
+                tools:text="dd/mm/yyyy" />
 
             <TextView
-                android:id="@+id/ThicknessLabel"
+                android:id="@+id/ClientDetailsTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="21dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="@string/Client_Details"
+                android:textAllCaps="false"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/ClientLabel"
-                app:layout_constraintTop_toBottomOf="@+id/MaterialLabel"
-                tools:text="Thickness:" />
+                android:textSize="16sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toStartOf="@+id/ClientDetailsBox"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/ThicknessView"
@@ -293,55 +152,197 @@
                 tools:text="3 mm" />
 
             <TextView
-                android:id="@+id/TotalCostLabel"
+                android:id="@+id/ProjectUseView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                app:layout_constraintBaseline_toBaselineOf="@+id/ProjectUseLabel"
+                app:layout_constraintEnd_toEndOf="@+id/ClientView"
+                app:layout_constraintStart_toStartOf="@+id/ClientView"
+                tools:text="Personal" />
+
+            <TextView
+                android:id="@+id/ClientLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/Client"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/PhoneLabel"
+                app:layout_constraintStart_toStartOf="@+id/ClientDetailsBox"
+                app:layout_constraintTop_toTopOf="@+id/ClientDetailsBox"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/ReservationHour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:text="@string/Reservation_Hour"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/ClientLabel"
-                app:layout_constraintTop_toBottomOf="@+id/ThicknessLabel"
-                tools:text="Total Cost:" />
+                app:layout_constraintTop_toBottomOf="@+id/ReservationDateLabel" />
 
             <TextView
-                android:id="@+id/TotalCostView"
+                android:id="@+id/ServiceTypeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/Service_Type"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/ClientLabel"
+                app:layout_constraintTop_toBottomOf="@+id/ProjectUseLabel" />
+
+            <TextView
+                android:id="@+id/ReservationDateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/Reservation_Date"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/ClientLabel"
+                app:layout_constraintTop_toTopOf="@+id/ReservationDetailsBox" />
+
+            <TextView
+                android:id="@+id/ServiceTypeView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                app:layout_constraintBaseline_toBaselineOf="@+id/TotalCostLabel"
+                app:layout_constraintBaseline_toBaselineOf="@+id/ServiceTypeLabel"
                 app:layout_constraintEnd_toEndOf="@+id/ClientView"
                 app:layout_constraintStart_toStartOf="@+id/ClientView"
-                tools:text="30 €" />
+                tools:text="PRO Service" />
 
             <TextView
                 android:id="@+id/NotesLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:text="@string/Notes"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/ClientLabel"
-                app:layout_constraintTop_toBottomOf="@+id/TotalCostLabel"
-                tools:text="Notes:" />
+                app:layout_constraintTop_toBottomOf="@+id/TotalCostLabel" />
 
             <TextView
                 android:id="@+id/NotesView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/rounded_back"
                 android:padding="12dp"
                 android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/ReservationDetailsBox"
                 app:layout_constraintEnd_toEndOf="@+id/ReservationDetailsBox"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/NotesLabel"
                 app:layout_constraintTop_toBottomOf="@+id/NotesLabel" />
 
+            <TextView
+                android:id="@+id/ThicknessLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/Thickness"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/ClientLabel"
+                app:layout_constraintTop_toBottomOf="@+id/MaterialLabel" />
+
+            <TextView
+                android:id="@+id/TotalCostLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/Total_Cost"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/ClientLabel"
+                app:layout_constraintTop_toBottomOf="@+id/ThicknessLabel" />
+
+            <TextView
+                android:id="@+id/EmailLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/Email"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ClientDetailsBox"
+                app:layout_constraintStart_toStartOf="@+id/ClientLabel"
+                app:layout_constraintTop_toBottomOf="@+id/PhoneLabel" />
+
+            <ImageView
+                android:id="@+id/ClientDetailsBox"
+                android:layout_width="0dp"
+                android:layout_height="118dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rule1"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                app:srcCompat="@drawable/rounded_back" />
+
+            <TextView
+                android:id="@+id/PhoneView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                app:layout_constraintBaseline_toBaselineOf="@+id/PhoneLabel"
+                app:layout_constraintEnd_toEndOf="@+id/ClientView"
+                app:layout_constraintStart_toStartOf="@+id/ClientView"
+                tools:text="617095521" />
+
+            <TextView
+                android:id="@+id/ClientView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                app:layout_constraintBaseline_toBaselineOf="@+id/ClientLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ClientLabel"
+                tools:text="Àlex Martínez Martínez" />
+
+            <TextView
+                android:id="@+id/MaterialView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                app:layout_constraintBaseline_toBaselineOf="@+id/MaterialLabel"
+                app:layout_constraintEnd_toEndOf="@+id/ClientView"
+                app:layout_constraintStart_toStartOf="@+id/ClientView"
+                tools:text="DM" />
+
+            <ImageView
+                android:id="@+id/rule1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintEnd_toEndOf="@+id/ClientDetailsTitle"
+                app:layout_constraintHorizontal_bias="0.457"
+                app:layout_constraintStart_toStartOf="@+id/ClientDetailsTitle"
+                app:layout_constraintTop_toBottomOf="@+id/ClientDetailsTitle"
+                app:srcCompat="@android:color/black" />
+
+            <ImageView
+                android:id="@+id/rule2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintEnd_toEndOf="@+id/ReservationDetailsTitle"
+                app:layout_constraintStart_toStartOf="@+id/ReservationDetailsTitle"
+                app:layout_constraintTop_toBottomOf="@+id/ReservationDetailsTitle"
+                app:srcCompat="@android:color/black" />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 

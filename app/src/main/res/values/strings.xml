@@ -3,7 +3,20 @@
     <string name="DateChoice">Choose Date:</string>
     <string name="Delete_Reservation_Menu">Delete Reservation</string>
     <string name="Delete_Reservation_Message">Are you sure you want to delete this reservation?</string>
-    <string name="Deleted_Reservation_Message">This reservation has been succesfully deleted.?</string>
+    <string name="Deleted_Reservation_Message">This reservation has been succesfully deleted.</string>
     <string name="OK">OK</string>
     <string name="CANCEL">CANCEL</string>
+    <string name="Client_Details">Client Details</string>
+    <string name="Reservation_Details">Reservation Details</string>
+    <string name="Client">Client:</string>
+    <string name="Phone">Phone:</string>
+    <string name="Email">Email:</string>
+    <string name="Reservation_Date">Reservation Date:</string>
+    <string name="Reservation_Hour">Reservation Hour:</string>
+    <string name="Project_Use">Project Use:</string>
+    <string name="Service_Type">Service Type:</string>
+    <string name="Material">Material:</string>
+    <string name="Thickness">Thickness:</string>
+    <string name="Total_Cost">Total Cost:</string>
+    <string name="Notes">Notes:</string>
 </resources>

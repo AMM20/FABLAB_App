@@ -51,7 +51,6 @@ public class ReservationListActivity extends AppCompatActivity {
     private Client client;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference resRef;
     private String docID;
     private String reservationID;
 
@@ -77,16 +76,15 @@ public class ReservationListActivity extends AppCompatActivity {
         }
         reservationList = new ArrayList<>();
 
+        setDocID();
+        CercaReserves();
+
         reservationListView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new Adapter();
         reservationListView.setAdapter(adapter);
 
     }
 
-    public void onClickSearchReservations(View view) {
-        setDocID();
-        CercaReserves();
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void onClickChooseDate(View view) {
@@ -102,7 +100,7 @@ public class ReservationListActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 setDocID();
-                //CercaReserves();
+                CercaReserves();
             }
         }, year, month, day);
         datePickerDialog.show();
@@ -159,6 +157,23 @@ public class ReservationListActivity extends AppCompatActivity {
         reserva.setReservationID(doc.getString("reservationID"));
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode) {
+            case 0:
+                if (resultCode == RESULT_OK)
+                {
+                    // Se actualiza la lista de reservas.
+                    setDocID();
+                    CercaReserves();
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView clientHourView;
@@ -181,7 +196,6 @@ public class ReservationListActivity extends AppCompatActivity {
                     Intent intent = new Intent(ReservationListActivity.this, ReservationDetailsActivity.class);
                     intent.putExtra("reserva", reservationList.get(pos));
                     intent.putExtra("docID",docID);
-                    intent.putExtra("reservationID",reservationID);
                     startActivityForResult(intent,0);
                 }
             });
@@ -205,7 +219,7 @@ public class ReservationListActivity extends AppCompatActivity {
             String reservedTurn = getReservedTurn(res);
 
             holder.clientHourView.setText(reservedTurn);
-            holder.clientView.setText(res.getClient().getName());
+            holder.clientView.setText(res.getClient().getName() + " " + res.getClient().getLastName());
 
         }
 
