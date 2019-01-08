@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Reserva implements Serializable {
 
-    // Declaració dels camps de la classe Client.
+    // Declaració dels camps de la classe Reserva.
 
     private String projectUse, serviceType, material, thickness, totalCost, reservationID;
     private Date date;
