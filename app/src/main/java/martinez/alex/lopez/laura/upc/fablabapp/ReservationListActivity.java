@@ -86,7 +86,6 @@ public class ReservationListActivity extends AppCompatActivity {
     public void onClickSearchReservations(View view) {
         setDocID();
         CercaReserves();
-        adapter.notifyDataSetChanged();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -103,7 +102,7 @@ public class ReservationListActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 setDocID();
-                CercaReserves();
+                //CercaReserves();
             }
         }, year, month, day);
         datePickerDialog.show();
@@ -118,24 +117,9 @@ public class ReservationListActivity extends AppCompatActivity {
 
     private void CercaReserves() {
 
-        resRef= db.collection("reservas").document(docID).collection("turnos");
-        resRef.orderBy("reservationID",Query.Direction.ASCENDING)
+        db.collection("reservas").document(docID).collection("turnos")
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            reservationList =  new ArrayList<>();
-                            for (DocumentSnapshot doc : task.getResult()) {
-                                OmpleReserva(doc);
-                                reservationList.add(reserva);
-                            }
-                        } else {
-                            Log.d("dbError", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-                /*.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot documentSnapshots) {
                         reservationList =  new ArrayList<>();
@@ -143,6 +127,7 @@ public class ReservationListActivity extends AppCompatActivity {
                             OmpleReserva(doc);
                             reservationList.add(reserva);
                         }
+                        adapter.notifyDataSetChanged();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -150,7 +135,7 @@ public class ReservationListActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Log.d("dbError",e.toString());
                     }
-                });*/
+                });
     }
 
     private void OmpleReserva(DocumentSnapshot doc) {
@@ -160,7 +145,7 @@ public class ReservationListActivity extends AppCompatActivity {
         client.setName(doc.getString("name"));
         client.setLastName(doc.getString("lastName"));
         client.setEmail(doc.getString("email"));
-        client.setPhone((Integer) doc.get("phone"));
+        client.setPhone(doc.getLong("phone").intValue());
         client.setNotes(doc.getString("notes"));
 
         reserva.setClient(client);
