@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">FABLAB App</string>
     <string name="DateChoice">Choose Date:</string>
+    <string name="Delete_Reservation_Menu">Delete Reservation</string>
+    <string name="Delete_Reservation_Message">Are you sure you want to delete this reservation?</string>
+    <string name="Deleted_Reservation_Message">This reservation has been succesfully deleted.?</string>
+    <string name="OK">OK</string>
+    <string name="CANCEL">CANCEL</string>
 </resources>

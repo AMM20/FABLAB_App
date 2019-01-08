@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Reserva implements Serializable {
 
-    private String projectUse, serviceType, material, thickness, totalCost;
+    private String projectUse, serviceType, material, thickness, totalCost, reservationID;
     private Date date;
     private List<String> reservedHours;
     private Client client;
@@ -73,6 +73,14 @@ public class Reserva implements Serializable {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public String getReservationID() {
+        return reservationID;
+    }
+
+    public void setReservationID(String reservationID) {
+        this.reservationID = reservationID;
     }
 
 

@@ -2,6 +2,7 @@ package martinez.alex.lopez.laura.upc.fablabapp;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -16,14 +17,17 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -49,6 +53,7 @@ public class ReservationListActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference resRef;
     private String docID;
+    private String reservationID;
 
     @SuppressLint("SimpleDateFormat")
     @Override
@@ -81,6 +86,7 @@ public class ReservationListActivity extends AppCompatActivity {
     public void onClickSearchReservations(View view) {
         setDocID();
         CercaReserves();
+        adapter.notifyDataSetChanged();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -115,7 +121,21 @@ public class ReservationListActivity extends AppCompatActivity {
         resRef= db.collection("reservas").document(docID).collection("turnos");
         resRef.orderBy("reservationID",Query.Direction.ASCENDING)
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            reservationList =  new ArrayList<>();
+                            for (DocumentSnapshot doc : task.getResult()) {
+                                OmpleReserva(doc);
+                                reservationList.add(reserva);
+                            }
+                        } else {
+                            Log.d("dbError", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+                /*.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot documentSnapshots) {
                         reservationList =  new ArrayList<>();
@@ -130,7 +150,7 @@ public class ReservationListActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Log.d("dbError",e.toString());
                     }
-                });
+                });*/
     }
 
     private void OmpleReserva(DocumentSnapshot doc) {
@@ -151,6 +171,7 @@ public class ReservationListActivity extends AppCompatActivity {
         reserva.setMaterial(doc.getString("material"));
         reserva.setThickness(doc.getString("thickness"));
         reserva.setTotalCost(doc.getString("totalCost"));
+        reserva.setReservationID(doc.getString("reservationID"));
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -171,8 +192,12 @@ public class ReservationListActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    //Intent intent = new Intent(this,ReservationDetailsActivity.class);
-
+                    int pos = getAdapterPosition();
+                    Intent intent = new Intent(ReservationListActivity.this, ReservationDetailsActivity.class);
+                    intent.putExtra("reserva", reservationList.get(pos));
+                    intent.putExtra("docID",docID);
+                    intent.putExtra("reservationID",reservationID);
+                    startActivityForResult(intent,0);
                 }
             });
         }

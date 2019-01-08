@@ -4,18 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
     tools:context=".ReservationDetailsActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#008577"
+        android:elevation="4dp"
+        android:theme="@style/AppThemeNoActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <ScrollView
         android:id="@+id/DetailsView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/Toolbar">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/DetailsLayout"
@@ -41,26 +54,24 @@
 
             <ImageView
                 android:id="@+id/ClientDetailsBox"
-                android:layout_width="335dp"
+                android:layout_width="0dp"
                 android:layout_height="118dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/ReservationDateLabel"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/ReservationDetailsBox"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.333"
-                app:srcCompat="@drawable/rounded_back"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="16dp" />
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                app:srcCompat="@drawable/rounded_back" />
 
             <TextView
                 android:id="@+id/ClientLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
                 android:layout_marginTop="16dp"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
@@ -68,8 +79,7 @@
                 app:layout_constraintStart_toStartOf="@+id/ClientDetailsBox"
                 app:layout_constraintTop_toTopOf="@+id/ClientDetailsBox"
                 app:layout_constraintVertical_chainStyle="spread"
-                tools:text="Client:"
-                android:layout_marginLeft="24dp" />
+                tools:text="Client:" />
 
             <TextView
                 android:id="@+id/ClientView"
@@ -148,17 +158,13 @@
                 android:id="@+id/ReservationDetailsBox"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/ClientDetailsBox"
                 app:layout_constraintTop_toBottomOf="@+id/ClientDetailsBox"
-                app:srcCompat="@drawable/rounded_back"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="16dp" />
+                app:srcCompat="@drawable/rounded_back" />
 
             <TextView
                 android:id="@+id/ReservationDateLabel"
@@ -323,8 +329,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_back"
                 android:padding="12dp"
@@ -332,9 +340,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/ReservationDetailsBox"
                 app:layout_constraintStart_toStartOf="@+id/NotesLabel"
-                app:layout_constraintTop_toBottomOf="@+id/NotesLabel"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="32dp" />
+                app:layout_constraintTop_toBottomOf="@+id/NotesLabel" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

@@ -38,7 +38,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread_inside"
         tools:text="@string/DateChoice" />
 
     <TextView
@@ -56,14 +56,14 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/ReservationListView"
-        android:layout_width="368dp"
-        android:layout_height="429dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_back_search"
+        android:padding="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -78,6 +78,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_back_search"
         android:onClick="onClickSearchReservations"
+        android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/CalendarButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
