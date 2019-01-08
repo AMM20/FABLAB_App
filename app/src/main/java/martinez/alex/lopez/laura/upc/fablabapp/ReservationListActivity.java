@@ -169,9 +169,9 @@ public class ReservationListActivity extends AppCompatActivity {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            clientHourView = findViewById(R.id.ClientHourView);
-            clientView = findViewById(R.id.ClientView);
-            itemBackgroundView = findViewById(R.id.ItemBackgroundView);
+            clientHourView = itemView.findViewById(R.id.ClientHourView);
+            clientView = itemView.findViewById(R.id.ClientView);
+            itemBackgroundView = itemView.findViewById(R.id.ItemBackgroundView);
 
             itemBackgroundView.setOnClickListener(new View.OnClickListener() {
                 @Override
