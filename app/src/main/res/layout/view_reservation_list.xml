@@ -24,7 +24,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:fontFamily="@font/montserrat"
         android:textColor="@android:color/black"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/ItemBackgroundView"
         app:layout_constraintEnd_toStartOf="@+id/ClientView"
@@ -33,14 +35,15 @@
         app:layout_constraintStart_toEndOf="@+id/ItemBackgroundView"
         app:layout_constraintStart_toStartOf="@+id/ItemBackgroundView"
         app:layout_constraintTop_toTopOf="@+id/ItemBackgroundView"
-        tools:text="10:00 - 10:30"
-        android:layout_marginLeft="24dp" />
+        tools:text="10:00 - 10:30" />
 
     <TextView
         android:id="@+id/ClientView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
         android:textColor="@android:color/black"
+        android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/ClientHourView"
         app:layout_constraintEnd_toStartOf="@+id/DetailsButton"
         app:layout_constraintHorizontal_bias="0.5"

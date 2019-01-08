@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FABLAB App</string>
+    <string name="DateChoice">Fecha Seleccionada:</string>
+    <string name="Delete_Reservation_Menu">Eliminar Reserva</string>
+    <string name="Delete_Reservation_Message">Estas seguro de querer eliminar esta reserva?</string>
+    <string name="Deleted_Reservation_Message">Esta reserva ha sido eliminada con éxito.</string>
+    <string name="OK">De acuerdo</string>
+    <string name="CANCEL">Cancelar</string>
+    <string name="Client_Details">Detalles del Cliente</string>
+    <string name="Reservation_Details">Detalles de la Reserva:</string>
+    <string name="Client">Cliente:</string>
+    <string name="Phone">Teléfono:</string>
+    <string name="Email">Correo:</string>
+    <string name="Reservation_Date">Fecha Reserva:</string>
+    <string name="Reservation_Hour">Hora Reserva:</string>
+    <string name="Project_Use">Uso del Proyecto:</string>
+    <string name="Service_Type">Tipo de Servicio:</string>
+    <string name="Material">Material:</string>
+    <string name="Thickness">Grosor:</string>
+    <string name="Total_Cost">Precio Total:</string>
+    <string name="Notes">Observaciones:</string>
+</resources>
