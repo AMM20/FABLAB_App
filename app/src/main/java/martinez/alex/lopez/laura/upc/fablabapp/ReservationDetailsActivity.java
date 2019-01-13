@@ -101,7 +101,17 @@ public class ReservationDetailsActivity extends AppCompatActivity {
                                         .addOnFailureListener(new OnFailureListener() { // Em el cas de que falli l'eliminació del document, es mostra un error al Log.
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
+
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(ReservationDetailsActivity.this);
+                                                builder.setMessage(R.string.error_delete_reservation_message);
+
+                                                builder.setPositiveButton(R.string.try_again, null);
+
+                                                AlertDialog dialog = builder.create();
+                                                dialog.show();
+
                                                 Log.d("dbError",e.toString());
+
                                             }
                                         });
                             }

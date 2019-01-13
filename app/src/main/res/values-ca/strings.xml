@@ -20,4 +20,7 @@
     <string name="Thickness">Gruix:</string>
     <string name="Total_Cost">Preu Total:</string>
     <string name="Notes">Observacions:</string>
+    <string name="error_delete_reservation_message">No s\'ha pogut eliminar aquesta reserva.</string>
+    <string name="try_again">TORNA A PROVAR</string>
+    <string name="error_reading_database_message">No s\'ha pogut llegir la base de dades</string>
 </resources>

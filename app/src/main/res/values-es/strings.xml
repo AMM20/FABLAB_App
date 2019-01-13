@@ -20,4 +20,7 @@
     <string name="Thickness">Grosor:</string>
     <string name="Total_Cost">Precio Total:</string>
     <string name="Notes">Observaciones:</string>
+    <string name="error_delete_reservation_message">No se ha podido elminar esta reserva.</string>
+    <string name="try_again">REINTENTAR</string>
+    <string name="error_reading_database_message">No se ha podido leer la base de datos</string>
 </resources>

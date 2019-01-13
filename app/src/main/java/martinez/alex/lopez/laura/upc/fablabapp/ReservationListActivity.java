@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -153,7 +154,17 @@ public class ReservationListActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ReservationListActivity.this);
+                        builder.setMessage(R.string.error_reading_database_message);
+
+                        builder.setPositiveButton(R.string.try_again, null);
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+
                         Log.d("dbError",e.toString());
+
                     }
                 });
 

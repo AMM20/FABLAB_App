@@ -19,4 +19,7 @@
     <string name="Thickness">Thickness:</string>
     <string name="Total_Cost">Total Cost:</string>
     <string name="Notes">Notes:</string>
+    <string name="error_delete_reservation_message">Unable to delete this reservation.</string>
+    <string name="try_again">TRY AGAIN</string>
+    <string name="error_reading_database_message">Unable to read the database.</string>
 </resources>
